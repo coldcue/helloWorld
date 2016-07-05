@@ -1,7 +1,7 @@
 {
-  "name": "flickr-hexmachina-example",
-  "url" : "https://github.com/jasononeil/useless/",
-  "description": "Flickr hexmachina example",
+  "name": "hexmachina-helloworld",
+  "url" : "",
+  "description": "hexmachina-helloworld",
   "version": "1.0.0",
   "dependencies": {
     "hexmachina": "git:https://github.com/DoclerLabs/hexMachina.git"

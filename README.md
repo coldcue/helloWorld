@@ -2,12 +2,12 @@
 
 #### 1. Prerequisites
 
-**On Windows** download and install:
+On *Windows* download and install:
 
  - NodeJS - https://nodejs.org/en/
  - Haxe - http://haxe.org
 
-**On MacOS** (using homebrew):
+On *MacOS* (using homebrew):
 
 ```sh
 $ brew install npm haxe
@@ -27,10 +27,16 @@ $ npm install --global gulp-cli
 $ npm install
 ```
 
-#### 4. Run haxelib install all
+#### 4. Install haxelib dependencies
 
-> This will install all haxe dependencies of the project. The Dependencies are found in the `haxelib.json`
+> Create a new project repository
 
 ```sh
-$ haxelib install all
+$ haxelib newrepo
+```
+
+> This will install all haxe dependencies of the project. The Dependencies are found in the `.hxml` files
+
+```sh
+$ haxelib install all --always
 ```
