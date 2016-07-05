@@ -1,0 +1,6 @@
+bin/
+node_modules/
+lib/
+/FlickrExample.hxproj
+.haxelib/
+/tools

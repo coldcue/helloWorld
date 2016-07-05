@@ -1,0 +1,16 @@
+{
+  "js": {
+
+  },
+  "flash": {
+
+  },
+  "path" : {
+    "resource": "resource",
+    "dist": {
+      "js": "dist/js",
+      "flash": "dist/flash"
+    },
+    "src": "src"
+  }
+}

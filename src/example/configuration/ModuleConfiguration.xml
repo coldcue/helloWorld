@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<!-- MODULES -->
+	<module id="helloModule" type="example.module.hello.HelloModule">
+		<argument ref="helloView"/>
+		<method-call name="setMessage">
+            <argument ref="message" />
+        </method-call>
+	</module>
+	
+	<message id="message" value="Hola Mundo" />
+	
+</root>

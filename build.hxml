@@ -1,0 +1,7 @@
+
+--each
+
+-cp src 
+-cp test
+
+-lib hexmachina
