@@ -9,27 +9,27 @@ import hex.view.viewhelper.ViewHelper;
  * ...
  * @author ali_o_kan - Laurent Deketelaere
  */
-class HelloViewHelper extends ViewHelper implements IMessageModelListener
+class HelloViewHelper extends ViewHelper<IHelloView> implements IMessageModelListener
 {
-	var _helloView : IHelloView; 
-	
+	var _helloView : IHelloView;
+
 	@Inject
 	var _model:IMessageModelRO;
-	
-	public function new( view : IHelloView ) 
+
+	public function new( view : IHelloView )
 	{
 		super();
 	}
-	
-	override function _initialize():Void 
+
+	override function _initialize():Void
 	{
 		super._initialize();
-		
+
 		this._helloView = cast this._view;
-		
+
 		this._model.addListener(this);
 	}
-	
+
 	public function onMessageChange( message : String ) : Void
 	{
 		_helloView.showMessage(message);

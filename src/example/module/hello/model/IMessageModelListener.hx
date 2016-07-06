@@ -1,12 +1,10 @@
 package example.module.hello.model;
 
-import hex.model.IModelListener;
-
 /**
  * @author ali_o_kan - Laurent Deketelaere
  */
 
-interface IMessageModelListener extends IModelListener
+interface IMessageModelListener
 {
 	function onMessageChange( message : String ) : Void;
 }
