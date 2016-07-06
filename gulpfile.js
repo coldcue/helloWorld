@@ -10,7 +10,8 @@ var path = require('path');
 
 // Plugins
 var gutil = require('gulp-util');
-var clean = require('gulp-clean')
+var clean = require('gulp-clean');
+var webserver = require('gulp-webserver');
 
 
 /*
@@ -79,11 +80,22 @@ gulp.task('resources', function() {
         .pipe(gulp.dest(config.js.path.dist));
 });
 
+/*
+  Clean the dist folder
+*/
 gulp.task('clean', function() {
     return gulp.src(config.path.dist, {
             read: false
         })
         .pipe(clean());
+});
+
+gulp.task('serve', ['haxe', 'resources'], function() {
+    gulp.src(config.js.path.dist)
+        .pipe(webserver({
+            livereload: true,
+            open: true
+        }));
 });
 
 gulp.task('default', ['haxe', 'resources'], function() {
