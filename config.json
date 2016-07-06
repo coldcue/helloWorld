@@ -1,17 +1,20 @@
 {
-  "js": {
-
-  },
-  "flash": {
-
-  },
-  "path" : {
-    "resource": "resource",
-    "dist": {
-      "js": "dist/js",
-      "flash": "dist/flash"
+    "js": {
+        "path": {
+            "dist": "dist/js",
+            "resource": "resource"
+        }
     },
-    "src": "src",
-    "haxelib": ".haxelib"
-  }
+    "flash": {
+        "path": {
+            "dist": {
+                "dist": "dist/js"
+            }
+        }
+    },
+    "path": {
+        "dist": "dist",
+        "src": "src",
+        "haxelib": ".haxelib"
+    }
 }

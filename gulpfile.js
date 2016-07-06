@@ -10,6 +10,7 @@ var path = require('path');
 
 // Plugins
 var gutil = require('gulp-util');
+var clean = require('gulp-clean')
 
 
 /*
@@ -57,7 +58,7 @@ gulp.task('haxe', function(cb) {
         libSrc += ' -cp ' + folder;
     });
 
-    var cmd = 'haxe ' + libSrc + ' build-src.hxml -js ' + config.path.dist.js + '/main.js';
+    var cmd = 'haxe ' + libSrc + ' build-src.hxml -js ' + path.join(config.js.path.dist, 'js', 'main.js');
 
     gutil.log('Executing', gutil.colors.red(cmd));
 
@@ -68,6 +69,23 @@ gulp.task('haxe', function(cb) {
     });
 });
 
-gulp.task('default', ['haxe'], function() {
+/*
+  Copy resources
+*/
+gulp.task('resources', function() {
+    return gulp.src('**/*.*', {
+            cwd: config.js.path.resource
+        })
+        .pipe(gulp.dest(config.js.path.dist));
+});
+
+gulp.task('clean', function() {
+    return gulp.src(config.path.dist, {
+            read: false
+        })
+        .pipe(clean());
+});
+
+gulp.task('default', ['haxe', 'resources'], function() {
 
 });
