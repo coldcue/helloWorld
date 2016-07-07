@@ -3,14 +3,14 @@
         "path": {
             "dist": "dist/js",
             "resource": "resource"
-        }
+        },
+        "artifact": "main.js"
     },
     "flash": {
         "path": {
-            "dist": {
-                "dist": "dist/js"
-            }
-        }
+            "dist": "dist/flash"
+        },
+        "artifact": "main.swf"
     },
     "path": {
         "dist": "dist",

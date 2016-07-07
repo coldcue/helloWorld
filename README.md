@@ -53,6 +53,8 @@ $ gulp clean
 
 #### Building the project
 
+> This will build both flash and js target
+
 ```sh
 $ gulp
 ```
@@ -61,6 +63,19 @@ $ gulp
 
 > For development, you can use gulp to serve a local page with livereload and automatic source change watcher.
 
+For JS
 ```sh
-$ gulp serve
+$ gulp serve-js
+```
+
+For flash
+```sh
+$ gulp serve-flash
+```
+
+#### Other
+
+To list all gulp tasks, use
+```sh
+$ gulp -T
 ```
