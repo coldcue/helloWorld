@@ -51,17 +51,19 @@ $ haxelib install all --always
 $ gulp clean
 ```
 
-#### Building the project
+#### Building the project for production
 
 > This will build both flash and js target
 
 ```sh
-$ gulp
+$ gulp --production
 ```
+
+> You can use the `--production` flag for any of the tasks
 
 #### Using for development
 
-> For development, you can use gulp to serve a local page with livereload and automatic source change watcher.
+> For development, you can use gulp to serve a local page with _livereload_ and automatic source change watcher.
 
 For JS
 ```sh

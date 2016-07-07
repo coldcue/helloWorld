@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var config = require('./config.json');
+var minimist = require('minimist');
 
 //TODO create haxe gulp plugin
 var exec = require('child_process').exec;
@@ -13,43 +14,51 @@ var gutil = require('gulp-util');
 var clean = require('gulp-clean');
 var webserver = require('gulp-webserver');
 
+// Get command line arguments
+var opts = minimist(process.argv.slice(3));
+
+if (opts.production) {
+    gutil.log(gutil.colors.red('=== THIS IS RUNNING IN PRODUCTION ==='));
+}
+
+/* ------------ TASKS ---------- /*
 
 /*
   Build haxe JS sources
 */
 gulp.task('haxe-js', function(cb) {
-    // Add every library to the command line
-    var libSrc = '';
-    getHaxelibSrcList().forEach(function(folder) {
-        libSrc += ' -cp ' + folder;
-    });
+    // Build the cmd
+    var cmd = [];
+    cmd.push('haxe');
+    cmd.push(getHaxelibSrcBuildString());
+    cmd.push('build-js.hxml')
+    cmd.push('-js ' + path.join(config.js.path.dist, 'js', config.js.artifact));
 
-    var cmd = 'haxe ' + libSrc + ' build-each.hxml -js ' + path.join(config.js.path.dist, 'js', config.js.artifact);
-    gutil.log('Executing', gutil.colors.red(cmd));
-    exec(cmd, function(err, stdout, stderr) {
-        if (err)
-            return cb(err);
-        cb();
-    });
+    // If this is not the production, then add the -debug flag
+    if (!opts.production) {
+        cmd.push('-debug')
+    }
+
+    execute(cmd.join(' '), cb);
 });
 
 /*
   Build haxe Flash sources
 */
 gulp.task('haxe-flash', function(cb) {
-    // Add every library to the command line
-    var libSrc = '';
-    getHaxelibSrcList().forEach(function(folder) {
-        libSrc += ' -cp ' + folder;
-    });
+    // Build the cmd
+    var cmd = [];
+    cmd.push('haxe');
+    cmd.push(getHaxelibSrcBuildString());
+    cmd.push('build-flash.hxml')
+    cmd.push('-swf ' + path.join(config.flash.path.dist, config.flash.artifact));
 
-    var cmd = 'haxe ' + libSrc + ' build-flash.hxml -swf ' + path.join(config.flash.path.dist, config.flash.artifact);
-    gutil.log('Executing', gutil.colors.red(cmd));
-    exec(cmd, function(err, stdout, stderr) {
-        if (err)
-            return cb(err);
-        cb();
-    });
+    // If this is not the production, then add the -debug flag
+    if (!opts.production) {
+        cmd.push('-debug')
+    }
+
+    execute(cmd.join(' '), cb);
 });
 
 /*
@@ -106,6 +115,9 @@ gulp.task('default', ['haxe-js', /*'haxe-flash',*/ 'resources'], function() {
 
 });
 
+
+/* ------------ HELPER FUNCTIONS ---------- /*
+
 /*
   Get haxelib dependencies
 */
@@ -137,4 +149,22 @@ function getHaxelibSrcList() {
         });
 
     return haxelibSrcList;
+}
+
+function getHaxelibSrcBuildString() {
+    // Add every library to the command line
+    var libs = [];
+    getHaxelibSrcList().forEach(function(folder) {
+        libs.push('-cp ' + folder);
+    });
+    return libs.join(' ');
+}
+
+function execute(cmd, cb) {
+    gutil.log('Executing', gutil.colors.grey(cmd));
+    exec(cmd, function(err, stdout, stderr) {
+        if (err)
+            return cb(err);
+        cb();
+    });
 }
