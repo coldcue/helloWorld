@@ -24,7 +24,7 @@ gulp.task('haxe-js', function(cb) {
         libSrc += ' -cp ' + folder;
     });
 
-    var cmd = 'haxe ' + libSrc + ' build-src.hxml -js ' + path.join(config.js.path.dist, 'js', config.js.artifact);
+    var cmd = 'haxe ' + libSrc + ' build-each.hxml -js ' + path.join(config.js.path.dist, 'js', config.js.artifact);
     gutil.log('Executing', gutil.colors.red(cmd));
     exec(cmd, function(err, stdout, stderr) {
         if (err)
@@ -43,7 +43,7 @@ gulp.task('haxe-flash', function(cb) {
         libSrc += ' -cp ' + folder;
     });
 
-    var cmd = 'haxe ' + libSrc + ' build-src.hxml -swf ' + path.join(config.flash.path.dist, config.flash.artifact);
+    var cmd = 'haxe ' + libSrc + ' build-flash.hxml -swf ' + path.join(config.flash.path.dist, config.flash.artifact);
     gutil.log('Executing', gutil.colors.red(cmd));
     exec(cmd, function(err, stdout, stderr) {
         if (err)

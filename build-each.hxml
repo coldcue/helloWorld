@@ -1,0 +1,6 @@
+-main example.Main
+
+-cp src
+-cp test
+
+-lib hexmachina

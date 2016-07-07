@@ -20,20 +20,20 @@ import hex.module.Module;
 class HelloModule extends Module implements IHelloModule
 {
 
-	public function new( view : IHelloView ) 
+	public function new( view : IHelloView )
 	{
 		super();
-		
+
 		this._addStatelessConfigClasses([CommandConfig, ModelConfig]);
-		
+
 		this.buildViewHelper( HelloViewHelper, view );
 	}
-	
+
 	public function setMessage( message : String ) : Void
 	{
-		this._dispatchPrivateMessage( HelloModuleMessage.SET_MESSAGE, [new StringRequest(message)] ); 
+		this._dispatchPrivateMessage( HelloModuleMessage.SET_MESSAGE, [new StringRequest(message)] );
 	}
-	
+
 	// Don't ask why, it is mandatory!
 	override function _getRuntimeDependencies() : IRuntimeDependencies
 	{
