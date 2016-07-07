@@ -90,12 +90,26 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-gulp.task('serve', ['haxe', 'resources'], function() {
-    gulp.src(config.js.path.dist)
+gulp.task('serve', ['haxe', 'resources', 'watch'], function() {
+    return gulp.src(config.js.path.dist)
         .pipe(webserver({
             livereload: true,
             open: true
         }));
+});
+
+gulp.task('watch', function() {
+    // Watch hex source changes
+    var haxeWatcher = gulp.watch(config.path.src + '/**/*.*', ['haxe']);
+    haxeWatcher.on('change', function(event) {
+        gutil.log('Haxe source ' + event.type, gutil.colors.cyan(event.path));
+    });
+
+    //Watch resources
+    var resourceWatcher = gulp.watch(config.js.path.resource + '/**/*.*', ['resources']);
+    resourceWatcher.on('change', function(event) {
+        gutil.log('Resource ' + event.type, gutil.colors.cyan(event.path));
+    });
 });
 
 gulp.task('default', ['haxe', 'resources'], function() {
