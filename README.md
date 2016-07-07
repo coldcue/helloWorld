@@ -40,3 +40,27 @@ $ haxelib newrepo
 ```sh
 $ haxelib install all --always
 ```
+
+# Using gulp
+
+#### Cleaning the build files
+
+> Build files are located in the `dist` folder
+
+```sh
+$ gulp clean
+```
+
+#### Building the project
+
+```sh
+$ gulp
+```
+
+#### Using for development
+
+> For development, you can use gulp to serve a local page with livereload and automatic source change watcher.
+
+```sh
+$ gulp serve
+```
