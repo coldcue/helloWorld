@@ -2,5 +2,4 @@
 <root name="hello">
 	<include file="example/configuration/ModuleConfiguration.xml"/>
 	<include file="example/configuration/ServiceConfiguration.xml"/>
-	<include file="example/configuration/ViewConfigurationJS.xml"/>
 </root>

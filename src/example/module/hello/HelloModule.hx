@@ -20,13 +20,25 @@ import hex.module.Module;
 class HelloModule extends Module implements IHelloModule
 {
 
-	public function new( view : IHelloView )
+	public function new()
 	{
 		super();
 
 		this._addStatelessConfigClasses([CommandConfig, ModelConfig]);
+		this.buildView();
+	}
 
-		this.buildViewHelper( HelloViewHelper, view );
+	function buildView() : Void
+	{
+		#if flash
+			var container : flash.display.Sprite = new flash.display.Sprite();
+			flash.Lib.current.addChild( container );
+			this.buildViewHelper( HelloViewHelper, new example.module.hello.view.HelloViewFlash( container ) );
+		#elseif js
+			this.buildViewHelper( HelloViewHelper, new example.module.hello.view.HelloViewJS() );
+		#else
+			#error  // will display an error "Not implemented on this platform"
+		#end
 	}
 
 	public function setMessage( message : String ) : Void

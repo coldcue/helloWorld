@@ -31,7 +31,7 @@ gulp.task('haxe-js', function(cb) {
     var cmd = [];
     cmd.push('haxe');
     cmd.push(getHaxelibSrcBuildString());
-    cmd.push('build-js.hxml')
+    cmd.push(config.js.hxml)
     cmd.push('-js ' + path.join(config.js.path.dist, 'js', config.js.artifact));
 
     // If this is not the production, then add the -debug flag
@@ -50,7 +50,7 @@ gulp.task('haxe-flash', function(cb) {
     var cmd = [];
     cmd.push('haxe');
     cmd.push(getHaxelibSrcBuildString());
-    cmd.push('build-flash.hxml')
+    cmd.push(config.flash.hxml)
     cmd.push('-swf ' + path.join(config.flash.path.dist, config.flash.artifact));
 
     // If this is not the production, then add the -debug flag
@@ -64,12 +64,23 @@ gulp.task('haxe-flash', function(cb) {
 /*
   Copy resources
 */
-gulp.task('resources', function() {
+gulp.task('resource-js', function() {
     return gulp.src('**/*.*', {
             cwd: config.js.path.resource
         })
         .pipe(gulp.dest(config.js.path.dist));
 });
+
+/*
+  Copy resources
+*/
+gulp.task('resource-flash', function() {
+    return gulp.src('**/*.*', {
+            cwd: config.flash.path.resource
+        })
+        .pipe(gulp.dest(config.flash.path.dist));
+});
+
 
 /*
   Clean the dist folder
@@ -81,8 +92,16 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-gulp.task('serve-js', ['haxe-js', 'resources', 'watch-js'], function() {
+gulp.task('serve-js', ['haxe-js', 'resource-js', 'watch-js'], function() {
     return gulp.src(config.js.path.dist)
+        .pipe(webserver({
+            livereload: true,
+            open: true
+        }));
+});
+
+gulp.task('serve-flash', ['haxe-flash', 'resource-flash', 'watch-flash'], function() {
+    return gulp.src(config.flash.path.dist)
         .pipe(webserver({
             livereload: true,
             open: true
@@ -97,7 +116,7 @@ gulp.task('watch-js', function() {
     });
 
     //Watch resources
-    var resourceWatcher = gulp.watch(config.js.path.resource + '/**/*.*', ['resources']);
+    var resourceWatcher = gulp.watch(config.js.path.resource + '/**/*.*', ['resource-js']);
     resourceWatcher.on('change', function(event) {
         gutil.log('Resource ' + event.type, gutil.colors.cyan(event.path));
     });
@@ -109,9 +128,15 @@ gulp.task('watch-flash', function() {
     haxeWatcher.on('change', function(event) {
         gutil.log('Haxe source ' + event.type, gutil.colors.cyan(event.path));
     });
+
+    //Watch resources
+    var resourceWatcher = gulp.watch(config.flash.path.resource + '/**/*.*', ['resource-flash']);
+    resourceWatcher.on('change', function(event) {
+        gutil.log('Resource ' + event.type, gutil.colors.cyan(event.path));
+    });
 });
 
-gulp.task('default', ['haxe-js', /*'haxe-flash',*/ 'resources'], function() {
+gulp.task('default', ['haxe-js', 'resource-js', 'haxe-flash', 'resource-flash'], function() {
 
 });
 

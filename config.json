@@ -2,15 +2,18 @@
     "js": {
         "path": {
             "dist": "dist/js",
-            "resource": "resource"
+            "resource": "resource/js"
         },
-        "artifact": "main.js"
+        "artifact": "main.js",
+        "hxml": "build-js.hxml"
     },
     "flash": {
         "path": {
-            "dist": "dist/flash"
+            "dist": "dist/flash",
+            "resource": "resource/flash"
         },
-        "artifact": "main.swf"
+        "artifact": "main.swf",
+        "hxml": "build-flash.hxml"
     },
     "path": {
         "dist": "dist",

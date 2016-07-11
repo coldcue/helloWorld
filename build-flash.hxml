@@ -1,2 +1,3 @@
 build-each.hxml
--swf-version 11
+-D advanced-telemetry 
+-swf-header 1024:768:61:900000

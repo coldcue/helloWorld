@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+	<title>Hello World Example</title>
+	<link rel="stylesheet" href="css/main.css">
+	<script src="https://cdn.rawgit.com/swfobject/swfobject/master/swfobject/swfobject.js"></script>
+</head>
+<body bgcolor="#900000" >
+
+	<div id="content"></div>
+
+	<script type="text/javascript">
+		var el = document.getElementById("content");
+		swfobject.embedSWF("swf/main.swf", el, 1024, 768, 10);
+	</script>
+</body>
+</html>
