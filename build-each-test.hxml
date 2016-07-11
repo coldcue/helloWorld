@@ -1,5 +1,6 @@
--main example.Main
+-main MainTest
 
 -cp src
+-cp test
 
 -lib hexmachina

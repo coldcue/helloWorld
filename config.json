@@ -5,7 +5,8 @@
             "resource": "resource/js"
         },
         "artifact": "main.js",
-        "hxml": "build-js.hxml"
+        "hxml": "build-js.hxml",
+        "testHxml": "build-js-test.hxml"
     },
     "flash": {
         "path": {

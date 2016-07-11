@@ -62,6 +62,25 @@ gulp.task('haxe-flash', function(cb) {
 });
 
 /*
+  Build haxe JS sources
+*/
+gulp.task('haxe-js-test', function(cb) {
+    // Build the cmd
+    var cmd = [];
+    cmd.push('haxe');
+    cmd.push(getHaxelibSrcBuildString());
+    cmd.push(config.js.testHxml)
+    cmd.push('-js ' + path.join('tmp', 'js', 'test.js'));
+
+    // If this is not the production, then add the -debug flag
+    if (!opts.production) {
+        cmd.push('-debug')
+    }
+
+    execute(cmd.join(' '), cb);
+});
+
+/*
   Copy resources
 */
 gulp.task('resource-js', function() {
