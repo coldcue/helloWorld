@@ -61,23 +61,41 @@ gulp.task('haxe-flash', function(cb) {
     execute(cmd.join(' '), cb);
 });
 
+// Test targets
+gulp.task('haxe-test', ['haxe-test-js', 'haxe-test-flash']);
+gulp.task('haxe-test-js', ['haxe-test-js-run']);
+gulp.task('haxe-test-flash', [/*'haxe-test-flash-run'*/]);
+
 /*
-  Build haxe JS sources
+  Build haxe JS test sources
 */
-gulp.task('haxe-js-test', function(cb) {
+gulp.task('haxe-test-js-build', function(cb) {
     // Build the cmd
     var cmd = [];
     cmd.push('haxe');
     cmd.push(getHaxelibSrcBuildString());
     cmd.push(config.js.testHxml)
-    cmd.push('-js ' + path.join('tmp', 'js', 'test.js'));
-
-    // If this is not the production, then add the -debug flag
-    if (!opts.production) {
-        cmd.push('-debug')
-    }
+    cmd.push('-js ' + path.join(config.path.testTemp, 'js', 'test.js'));
+    cmd.push('-debug')
 
     execute(cmd.join(' '), cb);
+});
+
+/*
+  Run JS test
+*/
+gulp.task('haxe-test-js-run', ['haxe-test-js-build'], function(cb) {
+    // Build the cmd
+    var cmd = [];
+    cmd.push('node');
+    cmd.push(path.join(config.path.testTemp, 'js', 'test.js'));
+
+    exec(cmd.join(' '), function(err, stdout, stderr) {
+        console.log(stdout);
+        if (err)
+            return cb(err);
+        cb();
+    });
 });
 
 /*
@@ -165,7 +183,7 @@ gulp.task('watch-flash', function() {
     });
 });
 
-gulp.task('default', ['haxe-js', 'resource-js', 'haxe-flash', 'resource-flash'], function() {
+gulp.task('default', ['haxe-js', 'resource-js', 'haxe-flash', 'resource-flash', 'haxe-test'], function() {
 
 });
 
