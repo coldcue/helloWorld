@@ -1,25 +1,32 @@
 # Getting Started
 
-#### 1. Prerequisites
+## Prerequisites
 
-On *Windows* download and install:
+#### On *Windows* download and install:
 
  - NodeJS - https://nodejs.org/en/
  - Haxe - http://haxe.org
+ - Flash Player Debugger - https://www.adobe.com/support/flashplayer/debug_downloads.html
 
-On *MacOS* (using homebrew):
+#### On *MacOS* (using homebrew):
 
 ```sh
-$ brew install npm haxe
+$ brew install npm haxe cask
 ```
 
-#### 2. Install gulp-cli globally
+```sh
+$ brew cask install flash-player-debugger
+```
+
+## Preparing the project
+
+#### 1. Install gulp-cli globally
 
 ```sh
 $ npm install --global gulp-cli
 ```
 
-#### 3. Run npm install
+#### 2. Run npm install
 
 > This will install all node dependencies of the project. The Dependencies are found in the `package.json`
 
@@ -27,7 +34,7 @@ $ npm install --global gulp-cli
 $ npm install
 ```
 
-#### 4. Install haxelib dependencies
+#### 3. Install haxelib dependencies
 
 > Create a new project repository
 

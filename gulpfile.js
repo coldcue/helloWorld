@@ -64,7 +64,7 @@ gulp.task('haxe-flash', function(cb) {
 // Test targets
 gulp.task('haxe-test', ['haxe-test-js', 'haxe-test-flash']);
 gulp.task('haxe-test-js', ['haxe-test-js-run']);
-gulp.task('haxe-test-flash', [/*'haxe-test-flash-run'*/]);
+gulp.task('haxe-test-flash', ['haxe-test-flash-run']);
 
 /*
   Build haxe JS test sources
@@ -96,6 +96,38 @@ gulp.task('haxe-test-js-run', ['haxe-test-js-build'], function(cb) {
             return cb(err);
         cb();
     });
+});
+
+/*
+  Build haxe JS test sources
+*/
+gulp.task('haxe-test-flash-build', function(cb) {
+    // Build the cmd
+    var cmd = [];
+    cmd.push('haxe');
+    cmd.push(getHaxelibSrcBuildString());
+    cmd.push(config.flash.testHxml)
+    cmd.push('-swf ' + path.join(config.path.testTemp, 'flash', 'test.swf'));
+    cmd.push('-debug')
+
+    execute(cmd.join(' '), cb);
+});
+
+/*
+  Run JS test
+*/
+gulp.task('haxe-test-flash-run', ['haxe-test-flash-build'], function(cb) {
+    // Build the cmd
+    // var cmd = [];
+    // cmd.push('node');
+    // cmd.push(path.join(config.path.testTemp, 'js', 'test.js'));
+    //
+    // exec(cmd.join(' '), function(err, stdout, stderr) {
+    //     console.log(stdout);
+    //     if (err)
+    //         return cb(err);
+    //     cb();
+    // });
 });
 
 /*

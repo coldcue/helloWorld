@@ -14,7 +14,8 @@
             "resource": "resource/flash"
         },
         "artifact": "main.swf",
-        "hxml": "build-flash.hxml"
+        "hxml": "build-flash.hxml",
+        "testHxml": "build-flash-test.hxml"
     },
     "path": {
         "dist": "dist",
