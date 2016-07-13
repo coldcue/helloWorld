@@ -104,12 +104,22 @@ gulp.task('resource-flash', function() {
 /*
   Clean the dist folder
 */
-gulp.task('clean', function() {
+gulp.task('clean', ['clean-test', 'clean-dist']);
+
+gulp.task('clean-dist', function() {
     return gulp.src(config.path.dist, {
             read: false
         })
         .pipe(clean());
 });
+
+gulp.task('clean-test', function() {
+    return gulp.src(config.path.testTemp, {
+            read: false
+        })
+        .pipe(clean());
+});
+
 
 gulp.task('serve-js', ['haxe-js', 'resource-js', 'watch-js'], function() {
     return gulp.src(config.js.path.dist)

@@ -18,6 +18,7 @@
     },
     "path": {
         "dist": "dist",
+        "testTemp": "tmp",
         "src": "src",
         "haxelib": ".haxelib"
     }

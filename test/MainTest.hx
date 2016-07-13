@@ -1,6 +1,7 @@
 package;
 
-import example.ExampleSuite;
+//import example.ExampleSuite;
+import example.ExampleTest;
 import hex.unittest.runner.ExMachinaUnitCore;
 import hex.unittest.notifier.TraceNotifier;
 #if js
@@ -27,7 +28,7 @@ class MainTest
 		emu.addListener( new TraceNotifier( false ) );
 		#end
 
-        emu.addTest( ExampleSuite );
-        emu.run();
+    emu.addTest( ExampleTest );
+    emu.run();
 	}
 }
